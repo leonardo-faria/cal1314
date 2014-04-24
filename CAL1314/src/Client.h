@@ -8,14 +8,20 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
+#include "includer.h"
+
+class node;
+using namespace std;
+
+
 class client {
 public:
 	client(node* location, int arrival_time);
-private:
 	static int count;
-	const int id;
+private:
 	node* location;
 	const int arrival_time;
+	const int id;
 };
 
 #endif /* CLIENT_H_ */

@@ -7,6 +7,8 @@
 
 #include "Client.h"
 
+int client::count=0;
+
 client::client(node* l,int t):arrival_time(t),id(count++)
 {
 	this->location=l;

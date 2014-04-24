@@ -8,12 +8,17 @@
 #ifndef EDGE_H_
 #define EDGE_H_
 
+#include "includer.h"
+
+
 class edge {
 public:
-	edge(node* source,node* target);
+	edge(node* source,node* target,int w);
+	static void start();
+	static int count;
 private:
-	node* source;
-	node* target;
+	const node* source;
+	const node* target;
 	const int weight;
 };
 

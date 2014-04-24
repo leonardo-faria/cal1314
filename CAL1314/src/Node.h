@@ -7,11 +7,13 @@
 
 #ifndef NODE_H_
 #define NODE_H_
-#include <vector>
+
+#include "includer.h"
 using namespace std;
+
 class node {
 public:
-
+	node();
 private:
 	static int count;
 	const int id;

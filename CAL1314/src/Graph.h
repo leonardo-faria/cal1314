@@ -8,8 +8,12 @@
 #ifndef GRAPH_H_
 #define GRAPH_H_
 
-#include <vector>
+#include "includer.h"
 
+class client;
+class edge;
+class node;
+class shuttle;
 using namespace std;
 
 class graph {
