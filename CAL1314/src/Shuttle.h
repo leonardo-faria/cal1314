@@ -8,13 +8,21 @@
 #ifndef SHUTTLE_H_
 #define SHUTTLE_H_
 
+#include <vector>
+#include "Client.h"
+using namespace std;
+
 class shuttle {
 public:
-
-
+	shuttle(int capacity);
+	int add_passanger(client* passanger);
+	int dropoff();
 private:
+	static int count;
+	const int id;
+	vector<client*> passengers;
 	node* location;
-	int capacity;
+	const int capacity;
 	int free_space;
 };
 

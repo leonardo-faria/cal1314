@@ -12,8 +12,10 @@ using namespace std;
 class node {
 public:
 
-
 private:
+	static int count;
+	const int id;
+	vector<client*> clients;
 	vector<edge> edges;
 };
 

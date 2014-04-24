@@ -8,14 +8,14 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
-
 class client {
 public:
-
+	client(node* location, int arrival_time);
 private:
+	static int count;
+	const int id;
 	node* location;
-	int arrival_time;
+	const int arrival_time;
 };
-
 
 #endif /* CLIENT_H_ */

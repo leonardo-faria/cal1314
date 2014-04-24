@@ -10,8 +10,7 @@
 
 class edge {
 public:
-
-
+	edge(node* source,node* target);
 private:
 	node* source;
 	node* target;
