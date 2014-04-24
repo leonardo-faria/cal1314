@@ -9,7 +9,13 @@
 #define CLIENT_H_
 
 
+class client {
+public:
 
+private:
+	node* location;
+	int arrival_time;
+};
 
 
 #endif /* CLIENT_H_ */

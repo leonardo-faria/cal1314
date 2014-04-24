@@ -8,7 +8,15 @@
 #ifndef EDGE_H_
 #define EDGE_H_
 
+class edge {
+public:
 
+
+private:
+	node* source;
+	node* target;
+	const int weight;
+};
 
 
 

@@ -7,8 +7,15 @@
 
 #ifndef NODE_H_
 #define NODE_H_
+#include <vector>
+using namespace std;
+class node {
+public:
 
 
+private:
+	vector<edge> edges;
+};
 
 
 

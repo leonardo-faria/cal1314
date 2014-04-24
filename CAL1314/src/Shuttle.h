@@ -8,7 +8,15 @@
 #ifndef SHUTTLE_H_
 #define SHUTTLE_H_
 
+class shuttle {
+public:
 
+
+private:
+	node* location;
+	int capacity;
+	int free_space;
+};
 
 
 

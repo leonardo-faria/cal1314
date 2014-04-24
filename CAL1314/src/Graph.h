@@ -8,7 +8,18 @@
 #ifndef GRAPH_H_
 #define GRAPH_H_
 
+#include <vector>
 
+using namespace std;
+
+class graph {
+public:
+
+
+private:
+	vector<node> nodes;
+	vector<shuttle> shuttles;
+};
 
 
 
