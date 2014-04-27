@@ -13,7 +13,7 @@
 
 class edge {
 public:
-	edge(node* source,node* target,int w);
+	edge(node* source,node* target,double w);
 	const int get_weight();
 	const node* get_sorce();
 	const node* get_target();
@@ -21,7 +21,7 @@ private:
 	static int count;
 	const node* source;
 	const node* target;
-	const int weight;
+	double weight;
 };
 
 

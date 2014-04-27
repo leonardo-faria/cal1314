@@ -9,7 +9,7 @@
 
 int client::count = 0;
 
-client::client(node* l, int t, int o) :
+client::client(node* l, double t, double o) :
 		arrival_time(t), id(count++), overhead(o), origin(l), min_pickup_time(
 				arrival_time - l->dist() - overhead) {
 	arrived = false;

@@ -9,7 +9,7 @@
 
 int node::count =0;
 
-node::node(bool a):id(count++),airport(a)
+node::node(bool a):id(count),airport(a)
 {
 	count++;
 }
@@ -24,7 +24,7 @@ int node::dist()
 
 int node::dist(const node* l)
 {
-	for (int i = 0; i < edges.size(); ++i) {
+	for (int i = 0; i < (int) edges.size(); ++i) {
 		if(edges[i].get_target()==l)
 			return edges[i].get_weight();
 	}
@@ -33,7 +33,7 @@ int node::dist(const node* l)
 
 bool node::visitable(int t)
 {
-	for (int i = 0; i < clients.size(); ++i) {
+	for (int i = 0; i < (int) clients.size(); ++i) {
 		if(clients[i]->get_p_time()>t)
 			return false;
 	}
@@ -43,4 +43,14 @@ bool node::visitable(int t)
 vector<client*> node::get_clients()
 {
 	return clients;
+}
+
+void node::add_edge(edge e)
+{
+	edges.push_back(e);
+}
+
+void node::add_client(client* c)
+{
+	clients.push_back(c);
 }

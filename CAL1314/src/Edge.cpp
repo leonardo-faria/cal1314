@@ -8,7 +8,7 @@
 #include "Edge.h"
 int edge::count = 0;
 
-edge::edge(node* s, node* t, int w) :
+edge::edge(node* s, node* t, double w) :
 		source(s), target(t), weight(w) {
 	count++;
 }

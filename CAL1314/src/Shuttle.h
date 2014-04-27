@@ -30,12 +30,13 @@ public:
 	bool full();
 	void visit(node* l);
 	void undo();
+
+	int free_space;
 private:
 	static int count;
-	const int id;
+	 int id;
 	vector<client*> passengers;
-	const int capacity;
-	int free_space;
+	 int capacity;
 	stack<stop> trajectory;
 };
 

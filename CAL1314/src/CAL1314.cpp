@@ -16,6 +16,7 @@ int main() {
 	g1.read();
 	//Mode 1
 
+
 	int time=g1.get_last_client_time();
 	if(g1.solve(time,g1.get_airport()))
 		cout << "Dá\n";

@@ -13,11 +13,9 @@
 class node;
 using namespace std;
 
-
 class client {
 public:
-	client(node* location, int arrival_time,int o);
-	node* get_location();
+	client(node* location, double arrival_time, double o);
 	int get_d_time();
 	int get_p_time();
 	const node* get_origin();
@@ -25,13 +23,17 @@ public:
 	bool boarded();
 	void drop();
 	void board();
+	bool operator==(client* c) {
+		return this->id==c->id;
+	}
+
 private:
 
-	const int arrival_time;
-	const int id;
-	const int overhead;
+	 double arrival_time;
+	 int id;
+	 double overhead;
 	const node* origin;
-	const int min_pickup_time;
+	 int min_pickup_time;
 	bool aboard;
 	bool arrived;
 	static int count;

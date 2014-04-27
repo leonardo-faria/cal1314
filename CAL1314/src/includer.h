@@ -12,6 +12,7 @@
 #include <string>
 #include <stack>
 #include <climits>
+#include <iostream>
 #include "Client.h"
 #include "Graph.h"
 #include "Edge.h"
