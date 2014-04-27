@@ -18,10 +18,11 @@ using namespace std;
 class graph {
 public:
 	graph(int mode, string input, string output);
-	int move(shuttle* s, node* target);
 	bool solved();
 	const int get_last_client_time();
 	bool solve(int t, node* l);
+	void read();
+	node* get_airport();
 private:
 	int arrived;
 	const int mode;

@@ -22,7 +22,7 @@ int node::dist()
 		return edges[0].get_weight();
 }
 
-int node::dist(node* l)
+int node::dist(const node* l)
 {
 	for (int i = 0; i < edges.size(); ++i) {
 		if(edges[i].get_target()==l)

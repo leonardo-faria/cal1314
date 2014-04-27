@@ -16,7 +16,7 @@ public:
 	node(bool airport);
 	const bool is_airport();
 	int dist();
-	int dist(node* l);
+	int dist(const node* l);
 	bool visitable(int t);
 	vector<client*> get_clients();
 private:

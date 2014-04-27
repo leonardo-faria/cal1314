@@ -12,6 +12,12 @@ graph::graph(int m, string i, string o) :
 	arrived = 0;
 }
 
+node* graph::get_airport()
+{
+	return &nodes[0];
+}
+
+
 bool graph::solved() {
 	return false;
 }
@@ -27,8 +33,11 @@ const int graph::get_last_client_time() {
 
 bool graph::solve(int time, node* l) {
 	for (int i = 0; i < clients.size(); ++i) {
-		if (time - l->dist(clients[i].get_location()) < clients[i].get_p_time())
-			return false;
+		//TODO arranjar forma de ver se consegue calcular distancias de cada pessoa
+		if (!clients[i].boarded())
+			if (time - l->dist(clients[i].get_origin())
+					< clients[i].get_p_time())
+				return false;
 	}
 
 	if (shuttles[0].full())
@@ -38,7 +47,7 @@ bool graph::solve(int time, node* l) {
 		if (nodes[i].visitable(l->dist(&nodes[i]))) {
 			shuttles[0].visit(&nodes[i]);
 
-			if(solve(l->dist(&nodes[i]),&nodes[i]))
+			if (solve(l->dist(&nodes[i]), &nodes[i]))
 				return true;
 
 			shuttles[0].undo();
@@ -50,3 +59,15 @@ bool graph::solve(int time, node* l) {
 	return false;
 }
 
+void graph::read() {
+	//podes mudar a ordem disto se quiseres mas as edges e pessoas têm de ser depois dos nodes
+
+	//lê tudo do ficheiro
+
+	//cria os nodes e faz push para o vector nodes (começa pelo aeroporto)
+
+	//acrescenta as edges a cada node
+
+	//cria os clientes e vai colocando cada um no seu node
+
+}

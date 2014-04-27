@@ -21,27 +21,24 @@ void shuttle::visit(node *l)
 		passengers.push_back(l->get_clients()[i]);
 		c.push_back(l->get_clients()[i]);
 		--free_space;
+		trajectory.top().c[i]->board();
 	}
+	l->get_clients().clear();
 	stop s(l,c);
 	trajectory.push(s);
-	for (int i = 0; i < (int) passengers.size(); ++i) {
-		passengers[i]->set_location(l);
-	}
-	location=l;
 }
 
 void shuttle::undo()
 {
 	for (int i = 0; i < (int) trajectory.top().c.size(); ++i) {
-		trajectory.top().c[i]->set_location(trajectory.top().l);
 		for (int j = 0; j < (int) passengers.size(); ++j) {
 			if(passengers[i]==trajectory.top().c[i])
 				passengers.erase(passengers.begin()+j);
 		}
+		trajectory.top().c[i]->drop();
 		++free_space;
 	}
 	trajectory.pop();
-	location=trajectory.top().l;
 }
 
 
