@@ -14,7 +14,7 @@
 class edge {
 public:
 	edge(node* source,node* target,double w);
-	const int get_weight();
+	const double get_weight();
 	const node* get_sorce();
 	const node* get_target();
 private:

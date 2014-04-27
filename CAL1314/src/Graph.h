@@ -19,10 +19,12 @@ class graph {
 public:
 	graph(int mode, string input, string output);
 	bool solved();
-	const int get_last_client_time();
-	bool solve(int t, node* l);
+	const double get_last_client_time();
+	bool solve(double t, node* l);
+	bool solve2();
 	void read();
 	node* get_airport();
+	void print();
 private:
 	int arrived;
 	const int mode;

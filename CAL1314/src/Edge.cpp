@@ -13,7 +13,7 @@ edge::edge(node* s, node* t, double w) :
 	count++;
 }
 
-const int edge::get_weight() {
+const double edge::get_weight() {
 	return weight;
 }
 

@@ -12,32 +12,39 @@
 #include "Client.h"
 using namespace std;
 
-class stop {
-public:
-	stop(node* l, vector<client*> c) {
-		this->l = l;
-		this->c = c;
-	}
-	node* l;
-	vector<client*> c;
-};
 
 class shuttle {
 public:
 	shuttle(int capacity);
-	void add_passanger(client* passanger);
-	void drop_passanger(client* passanger);
 	bool full();
 	void visit(node* l);
 	void undo();
 
-	int free_space;
+	int getCapacity() const {
+		return capacity;
+	}
+
+	int getPassagerNumber() const{
+		return passangers.size();
+	}
+
+	int getFreeSpace() const {
+		return free_space;
+	}
+
+	int getId() const {
+		return id;
+	}
+
+	void print();
+
 private:
 	static int count;
-	 int id;
-	vector<client*> passengers;
-	 int capacity;
-	stack<stop> trajectory;
+	int capacity;
+	int id;
+	int free_space;
+	stack<node*> trajectory;
+	vector<client*> passangers;
 };
 
 #endif /* SHUTTLE_H_ */

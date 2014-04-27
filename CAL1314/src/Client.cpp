@@ -10,34 +10,20 @@
 int client::count = 0;
 
 client::client(node* l, double t, double o) :
-		arrival_time(t), id(count++), overhead(o), origin(l), min_pickup_time(
+		arrival_time(t), id(count), overhead(o), origin(l), min_pickup_time(
 				arrival_time - l->dist() - overhead) {
 	arrived = false;
-	aboard=false;
+	count++;
 }
 
-int client::get_d_time() {
+double client::get_d_time() {
 	return arrival_time;
 }
 
-int client::get_p_time() {
+double client::get_p_time() {
 	return min_pickup_time;
 }
 
-const node* client::get_origin() {
+ node* client::get_origin() {
 	return origin;
-}
-
-void client::drop()
-{
-	aboard=false;
-}
-void client::board()
-{
-	aboard=true;
-}
-
-bool client::boarded()
-{
-	return aboard;
 }

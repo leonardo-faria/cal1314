@@ -16,25 +16,26 @@ using namespace std;
 class client {
 public:
 	client(node* location, double arrival_time, double o);
-	int get_d_time();
-	int get_p_time();
-	const node* get_origin();
+	double get_d_time();
+	double get_p_time();
+	 node* get_origin();
 	void set_location(node* l);
-	bool boarded();
-	void drop();
-	void board();
+	void print() {
+		cout << " arrival_time=" << arrival_time
+				<< "id=" << id
+				<< " min_pickup_time=" << min_pickup_time;
+	}
 	bool operator==(client* c) {
-		return this->id==c->id;
+		return this->id == c->id;
 	}
 
 private:
 
-	 double arrival_time;
-	 int id;
-	 double overhead;
-	const node* origin;
-	 int min_pickup_time;
-	bool aboard;
+	double arrival_time;
+	int id;
+	double overhead;
+	 node* origin;
+	double min_pickup_time;
 	bool arrived;
 	static int count;
 };

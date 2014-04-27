@@ -15,21 +15,33 @@ class node {
 public:
 	node(bool airport);
 	const bool is_airport();
-	int dist();
-	int dist(const node* l);
-	bool visitable(int t);
+
+	double dist();
+	double dist(const node* l);
+	bool visitable(double t);
 	vector<client*> get_clients();
+	void remove_clients()
+	{
+		while(clients.size())
+			clients.pop_back();
+	}
+
+	int get_id()
+	{
+		return id;
+	}
 
 	void add_client(client* c);
 	void add_edge(edge e);
 
 	bool operator==(node* n) {
-		return this->id==n->id;
+		return this->id == n->id;
 	}
-	 int id;
 private:
+
+	int id;
 	static int count;
-	 bool airport;
+	bool airport;
 	vector<client*> clients;
 	vector<edge> edges;
 };
