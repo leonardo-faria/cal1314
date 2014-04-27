@@ -10,17 +10,13 @@
 
 #include <vector>
 #include <string>
+#include <stack>
+#include <climits>
 #include "Client.h"
 #include "Graph.h"
 #include "Edge.h"
 #include "Node.h"
 #include "Shuttle.h"
-using namespace std;
-class client;
-class graph;
-class edge;
-class node;
-class shuttle;
 
 
 

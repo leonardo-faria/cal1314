@@ -16,12 +16,20 @@ using namespace std;
 
 class client {
 public:
-	client(node* location, int arrival_time);
-	static int count;
+	client(node* location, int arrival_time,int o);
+	node* get_location();
+	int get_d_time();
+	int get_p_time();
+	void set_location(node* l);
 private:
-	node* location;
+
 	const int arrival_time;
 	const int id;
+	const int overhead;
+	const int min_pickup_time;
+	bool arrived;
+	static int count;
+	node* location;
 };
 
 #endif /* CLIENT_H_ */

@@ -13,10 +13,16 @@ using namespace std;
 
 class node {
 public:
-	node();
+	node(bool airport);
+	const bool is_airport();
+	int dist();
+	int dist(node* l);
+	bool visitable(int t);
+	vector<client*> get_clients();
 private:
 	static int count;
 	const int id;
+	const bool airport;
 	vector<client*> clients;
 	vector<edge> edges;
 };
