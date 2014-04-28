@@ -20,8 +20,7 @@ public:
 	graph(int mode, string input, string output);
 	bool solved();
 	const double get_last_client_time();
-	bool solve(double t, node* l);
-	bool solve2();
+	bool solve(double t, node* l,double tc);
 	void read();
 	node* get_airport();
 	void print();
@@ -33,6 +32,7 @@ private:
 	vector<client> clients;
 	vector<node> nodes;
 	vector<shuttle> shuttles;
+	vector<string> result;
 };
 
 #endif /* GRAPH_H_ */

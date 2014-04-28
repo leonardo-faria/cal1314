@@ -130,63 +130,83 @@ const double graph::get_last_client_time() {
 			n++;
 		}
 	}
-	cout << "tempo " << t;
 	return t;
 }
 
-bool graph::solve2() {
-
-	return solve(get_last_client_time(), get_airport());
-}
-
-bool graph::solve(double time, node* l) {
+bool graph::solve(double time, node* l, double tc) {
 //TODO MUDAR
-
-//falha: dist, devolve sempre -1, e get_p_time
-	for (int i = 0; i < (int) nodes.size(); ++i) {
-		for (int j = 0; j < (int) nodes[i].get_clients().size(); ++j) {
-			if (time - l->dist(&nodes[i])
-					< nodes[i].get_clients()[j]->get_p_time())
-				return false;
-		}
+	//falha: dist, devolve sempre -1, e get_p_time
+//	for (int i = 0; i < (int) nodes.size(); ++i) {
+//		for (int j = 0; j < (int) nodes[i].get_clients().size(); ++j) {
+//			if (time - l->dist(&nodes[i])
+//					< nodes[i].get_clients()[j]->get_p_time())
+//				return false;
+//		}
+//	}
+	if (l->get_id() == 0) {
+		stringstream ss;
+		ss << "\nArrives at the the airport at ";
+		double t = time - l->dist();
+		int n = t;
+		t = t - (double) n;
+		t = t * 60;
+		ss << n << ":" << t;
+		if (t == 0)
+			ss << 0;
+		ss << endl;
+		result.push_back(ss.str());
 	}
-
-	if (shuttles[0].getPassagerNumber() == (int) clients.size())
+	if (shuttles[0].getPassagerNumber() == (int) clients.size()) {
+		stringstream ss;
+		ss << "\Leaves the the airport at ";
+		double t = time - l->dist();
+		int n = t;
+		t = t - (double) n;
+		t = t * 60;
+		ss << n << ":" << t;
+		if (t == 0)
+			ss << 0;
+		result.push_back(ss.str());
 		return true;
-
+	}
 	for (int i = 1; i < (int) nodes.size(); ++i) {
 		if (nodes[i].get_clients().size() == 0)
 			continue;
-		shuttles[0].visit(&nodes[i]);
-		if (solve(time - l->dist(&nodes[i]), &nodes[i]))
-			return true;
+		if (nodes[i].visitable(time - l->dist(&nodes[i]))) {
+			vector<int> v;
+			shuttles[0].visit(&nodes[i]);
+			if (solve(time - l->dist(&nodes[i]), &nodes[i], tc)) {
+				string str;
+				stringstream ss;
+				ss << "\nStops in " << i << " at ";
+				double t = time - l->dist(&nodes[i]);
+				int n = t;
+				t = t - (double) n;
+				t = t * 60;
+				ss << n << ":" << t;
+				if (t == 0)
+					ss << 0;
+				ss << "\nPicks up clients: ";
+				for (int k = 0; k < (int) clients.size(); ++k) {
+					if (clients[k].get_origin()->get_id() == i)
+						ss << k << ", ";
+				}
+				str = ss.str();
+				str.resize(str.size() - 2);
+				result.push_back(str);
+				return true;
+			}
+			shuttles[0].undo();
+		} else {
+			double new_time = get_last_client_time();
+			if (new_time - get_airport()->dist(&nodes[i])
+					< tc + get_airport()->dist(&nodes[i]))
+				continue;
 
-		shuttles[0].undo();
-
-//		else {
-//			// vai para o aeroporto
-//			double time1 = time - l->dist(&nodes[0]);
-//
-//			// determina nova hora de partida do aeroporto
-//			double time2 = get_last_client_time();
-//
-//			if (time2 < time1)
-//				continue;
-//
-//			// vai para node i
-//			time2 -= l->dist(&nodes[i]);
-//
-//			if (nodes[i].visitable(time2)) {
-//
-//				shuttles[0].visit(&nodes[i]);
-//				if (solve(time2, &nodes[i]))
-//					return true;
-//
-//				shuttles[0].undo();
-//			}
-//
-//		}
-
+			if (solve(new_time, get_airport(), new_time)) {
+				return true;
+			}
+		}
 	}
 
 	return false;
@@ -243,5 +263,8 @@ void graph::read() {
 }
 
 void graph::print() {
-	shuttles[0].print();
+	for (int i = 1; i < result.size(); ++i) {
+		cout << result[i];
+	}
+	cout << result[0];
 }

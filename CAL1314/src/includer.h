@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 #include "Client.h"
 #include "Graph.h"
 #include "Edge.h"

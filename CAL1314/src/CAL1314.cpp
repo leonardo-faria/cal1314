@@ -16,12 +16,11 @@ int main() {
 	//g1.read();
 	//Mode 1
 
-	if(g1.solve(g1.get_last_client_time(),g1.get_airport()))
+	if(g1.solve(g1.get_last_client_time(),g1.get_airport(),g1.get_last_client_time()))
 	{
-		cout << "Dá\n";
 		g1.print();
 	}
 	else
-		cout << "Não dá\n";
+		cout << "Impossivel resolver\n";
 }
 

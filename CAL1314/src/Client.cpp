@@ -24,6 +24,10 @@ double client::get_p_time() {
 	return min_pickup_time;
 }
 
- node* client::get_origin() {
+node* client::get_origin() {
 	return origin;
+}
+
+int client::get_id() {
+	return id;
 }

@@ -18,6 +18,7 @@ public:
 	client(node* location, double arrival_time, double o);
 	double get_d_time();
 	double get_p_time();
+	int get_id();
 	 node* get_origin();
 	void set_location(node* l);
 	void print() {
