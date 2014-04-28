@@ -1,12 +1,27 @@
-Leaves the the airport at 6:30
-Stops in 2 at 7:45
-Picks up clients: 1
-Stops in 1 at 8:00
-Picks up clients: 0
+
+Leaves the airport at 7:15
+
 Stops in 3 at 8:30
 Picks up clients: 2
-Stops in 4 at 8:45
-Picks up clients: 3
-Stops in 5 at 9:00
+
+Stops in 2 at 8:45
+Picks up clients: 1
+
+Stops in 1 at 9:00
+Picks up clients: 0
+
+Arrives at the airport at 10:00
+
+Leaves the airport at 11:00
+
+Stops in 5 at 12:00
 Picks up clients: 4
-Arrives at the the airport at 10:00
+
+Arrives at the airport at 13:00
+
+Leaves the airport at 17:30
+
+Stops in 4 at 18:45
+Picks up clients: 3
+
+Arrives at the airport at 20:00

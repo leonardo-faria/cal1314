@@ -33,6 +33,7 @@ private:
 	vector<node> nodes;
 	vector<shuttle> shuttles;
 	vector<string> result;
+	vector<int> aux;
 };
 
 #endif /* GRAPH_H_ */

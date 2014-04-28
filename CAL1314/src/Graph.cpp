@@ -92,8 +92,8 @@ graph::graph(int m, string i, string o) :
 	client *c1 = new client(&nodes[1], 10, 1);
 	client *c2 = new client(&nodes[2], 10, 1);
 	client *c3 = new client(&nodes[3], 10.5, 1);
-	client *c4 = new client(&nodes[4], 11, 1);
-	client *c5 = new client(&nodes[5], 11, 1);
+	client *c4 = new client(&nodes[4], 20, 1);
+	client *c5 = new client(&nodes[5], 13, 1);
 
 	clients.push_back(*c1);
 	nodes[1].add_client(c1);
@@ -134,7 +134,7 @@ const double graph::get_last_client_time() {
 bool graph::solve(double time, node* l, double tc) {
 	if (l->get_id() == 0) {
 		stringstream ss;
-		ss << "\nArrives at the the airport at ";
+		ss << "\nArrives at the airport at ";
 		double t = time - l->dist();
 		int n = t;
 		t = t - (double) n;
@@ -144,10 +144,11 @@ bool graph::solve(double time, node* l, double tc) {
 			ss << 0;
 		ss << endl;
 		result.push_back(ss.str());
+		aux.push_back(tc);
 	}
 	if (shuttles[0].getPassagerNumber() == (int) clients.size()) {
 		stringstream ss;
-		ss << "Leaves the the airport at ";
+		ss << "\nLeaves the airport at ";
 		double t = time - l->dist();
 		int n = t;
 		t = t - (double) n;
@@ -155,7 +156,10 @@ bool graph::solve(double time, node* l, double tc) {
 		ss << n << ":" << t;
 		if (t == 0)
 			ss << 0;
+
+		ss << endl;
 		result.push_back(ss.str());
+		aux.push_back(tc);
 		return true;
 	}
 	for (int i = 1; i < (int) nodes.size(); ++i) {
@@ -182,7 +186,9 @@ bool graph::solve(double time, node* l, double tc) {
 				}
 				str = ss.str();
 				str.resize(str.size() - 2);
+				str+="\n";
 				result.push_back(str);
+				aux.push_back(tc);
 				return true;
 			}
 			shuttles[0].undo();
@@ -191,10 +197,23 @@ bool graph::solve(double time, node* l, double tc) {
 			if (new_time - get_airport()->dist(&nodes[i])
 					< tc + get_airport()->dist(&nodes[i]))
 				continue;
-
+			stringstream ss;
+			ss << "\nLeaves the airport at ";
+			double t = time - l->dist();
+			int n = t;
+			t = t - (double) n;
+			t = t * 60;
+			ss << n << ":" << t;
+			if (t == 0)
+				ss << 0;
+			ss << endl;
+			result.push_back(ss.str());
+			aux.push_back(tc);
 			if (solve(new_time, get_airport(), new_time)) {
 				return true;
 			}
+			result.pop_back();
+			aux.pop_back();
 		}
 	}
 
@@ -251,11 +270,33 @@ void graph::read() {
 	infile.close();
 }
 
+bool member(vector<int> v, int n) {
+	for (int i = 0; i < (int) v.size(); ++i) {
+		if (v[i] == n)
+			return true;
+	}
+	return false;
+}
+
 void graph::print() {
 	ofstream ss;
 	ss.open(output.c_str());
-	for (int i = 1; i < (int) result.size(); ++i) {
-		ss << result[i];
+
+	vector<int> printed;
+
+	for (int i = 0; i < (int) aux.size(); ++i) {
+
+		if (!member(printed, aux[i])) {
+			ss << result[i + 1];
+
+			for (int j = i + 2; j < (int) aux.size(); ++j) {
+				if (aux[j] == aux[i])
+					ss << result[j];
+			}
+
+			ss << result[i];
+
+			printed.push_back(aux[i]);
+		}
 	}
-	ss << result[0];
 }
