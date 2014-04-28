@@ -134,15 +134,6 @@ const double graph::get_last_client_time() {
 }
 
 bool graph::solve(double time, node* l, double tc) {
-//TODO MUDAR
-	//falha: dist, devolve sempre -1, e get_p_time
-//	for (int i = 0; i < (int) nodes.size(); ++i) {
-//		for (int j = 0; j < (int) nodes[i].get_clients().size(); ++j) {
-//			if (time - l->dist(&nodes[i])
-//					< nodes[i].get_clients()[j]->get_p_time())
-//				return false;
-//		}
-//	}
 	if (l->get_id() == 0) {
 		stringstream ss;
 		ss << "\nArrives at the the airport at ";
@@ -158,7 +149,7 @@ bool graph::solve(double time, node* l, double tc) {
 	}
 	if (shuttles[0].getPassagerNumber() == (int) clients.size()) {
 		stringstream ss;
-		ss << "\Leaves the the airport at ";
+		ss << "Leaves the the airport at ";
 		double t = time - l->dist();
 		int n = t;
 		t = t - (double) n;
@@ -265,7 +256,7 @@ void graph::read() {
 void graph::print() {
 	ofstream ss;
 	ss.open(output.c_str());
-	for (int i = 1; i < result.size(); ++i) {
+	for (int i = 1; i < (int) result.size(); ++i) {
 		ss << result[i];
 	}
 	ss << result[0];
