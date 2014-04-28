@@ -125,12 +125,12 @@ const double graph::get_last_client_time() {
 	double t = 0.0;
 	for (int i = 0; i < (int) nodes.size(); ++i) {
 		for (int j = 0; j < (int) nodes[i].get_clients().size(); ++j) {
-			if (n == 0 || nodes[i].get_clients()[j]->get_d_time()<t)
+			if (n == 0 || nodes[i].get_clients()[j]->get_d_time() < t)
 				t = nodes[i].get_clients()[j]->get_d_time();
 			n++;
 		}
 	}
-	cout <<"tempo "<< t;
+	cout << "tempo " << t;
 	return t;
 }
 
@@ -157,15 +157,12 @@ bool graph::solve(double time, node* l) {
 	for (int i = 1; i < (int) nodes.size(); ++i) {
 		if (nodes[i].get_clients().size() == 0)
 			continue;
-		if (nodes[i].visitable(time - l->dist(&nodes[i]))) {
+		shuttles[0].visit(&nodes[i]);
+		if (solve(time - l->dist(&nodes[i]), &nodes[i]))
+			return true;
 
-			shuttles[0].visit(&nodes[i]);
-			if (solve(time - l->dist(&nodes[i]), &nodes[i]))
-				return true;
+		shuttles[0].undo();
 
-			shuttles[0].undo();
-
-		}
 //		else {
 //			// vai para o aeroporto
 //			double time1 = time - l->dist(&nodes[0]);
@@ -196,19 +193,55 @@ bool graph::solve(double time, node* l) {
 }
 
 void graph::read() {
-	//podes mudar a ordem disto se quiseres mas as edges e pessoas têm de ser depois dos nodes
+	int nLines, targetID, width, arrivalTime, overhead;
+	string s, line, sTargetID, sWidth, sArrivalTime, sOverhead;
+	stringstream ss;
+	ifstream infile;
 
-	//lê tudo do ficheiro
+	infile.open(input.c_str());
 
-	//cria os nodes e faz push para o vector nodes (começa pelo aeroporto)
+	//generate nodes
+	node a(1);
+	node b(0);
+	nodes.push_back(a);
+	getline(infile, line);
+	nLines = atoi(line.c_str());
+	for (int i = 0; i < nLines; ++i) {
+		nodes.push_back(b);
+	}
+	//load clients
+	getline(infile, line); //numero de clientes
+	nLines = atoi(line.c_str());
+	for (int i = 0; i < nLines; ++i) {
+		getline(infile, line);
+		getline(ss, sTargetID, ';');
+		targetID = atoi(sTargetID.c_str());
+		getline(ss, sArrivalTime, ';');
+		arrivalTime = atoi(sArrivalTime.c_str());
+		getline(ss, sOverhead, ';');
+		overhead = atoi(sTargetID.c_str());
+		clients.push_back(client(&nodes[targetID], arrivalTime, overhead));
+		nodes[targetID].add_client(&clients.back());
+	}
+	//load nodes/edges
+	while (!infile.eof()) {
+		int j = 1; //node id
+		getline(infile, line); //numero de edges no node
+		nLines = atoi(line.c_str());
+		for (int i = 0; i < nLines; ++i) {
+			getline(infile, line);
+			getline(ss, sTargetID, ';');
+			targetID = atoi(sTargetID.c_str());
+			getline(ss, sWidth, ';');
+			width = atoi(sWidth.c_str());
+			nodes[j].add_edge(edge(&nodes[j], &nodes[targetID], width));
+		}
+		++j;
+	}
 
-	//acrescenta as edges a cada node
-
-	//cria os clientes e vai colocando cada um no seu node
-
+	infile.close();
 }
 
-void graph::print()
-{
+void graph::print() {
 	shuttles[0].print();
 }

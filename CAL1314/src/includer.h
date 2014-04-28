@@ -13,6 +13,9 @@
 #include <stack>
 #include <climits>
 #include <iostream>
+#include <cstdlib>
+#include <fstream>
+#include <sstream>
 #include "Client.h"
 #include "Graph.h"
 #include "Edge.h"
