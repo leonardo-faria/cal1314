@@ -263,8 +263,10 @@ void graph::read() {
 }
 
 void graph::print() {
+	ofstream ss;
+	ss.open(output.c_str());
 	for (int i = 1; i < result.size(); ++i) {
-		cout << result[i];
+		ss << result[i];
 	}
-	cout << result[0];
+	ss << result[0];
 }
