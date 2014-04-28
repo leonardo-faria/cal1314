@@ -108,8 +108,6 @@ graph::graph(int m, string i, string o) :
 
 	shuttle s(5);
 	shuttles.push_back(s);
-
-	//solve(get_last_client_time(),get_airport());
 }
 
 node* graph::get_airport() {
